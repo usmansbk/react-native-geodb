@@ -25,7 +25,7 @@ export default class List extends React.Component {
     currentOffSet: null,
     loading: false,
     data: [],
-    metadata: null,
+    metadata: {},
   };
 
   _fetch = debounce((namePrefix) => {
@@ -63,7 +63,7 @@ export default class List extends React.Component {
     if (value.length >= this.props.minLength) this._fetch(value)
   });
 
-  _onPressItem = (data) => this.props.onSelectItem(data, this.state.metadata);
+  _onPressItem = (data) => this.props.onSelectItem(data);
 
   _keyExtractor = (item) => String(item.id);
 
@@ -92,7 +92,16 @@ export default class List extends React.Component {
   
   _renderSeparator = () => <Separator styles={this.props.styles} />;
 
-  _renderEmpty = () => <Empty source={this.props.emptyListImagePlaceholder} />;
+  _renderEmpty = () => {
+    const { ListEmptyComponent, styles } = this.props;
+    let Component = Empty;
+    if (ListEmptyComponent) Component = ListEmptyComponent;
+    return <Component
+      source={this.props.emptyListImagePlaceholder}
+      metadata={this.state.metadata}
+      styles={styles}
+    />;
+  };
 
   render() {
     return (
@@ -132,7 +141,7 @@ List.defaultProps = {
     languageCode: "en"
   },
   query: {},
-  onSelectItem: () => null,
+  onSelectItem: () => null
 };
 
 List.propTypes = {
@@ -150,5 +159,6 @@ List.propTypes = {
   params: PropTypes.object,
   onSelectItem: PropTypes.func,
   placeholderTextColor: PropTypes.string,
-  emptyListPlaceholder: PropTypes.object
+  emptyListPlaceholder: PropTypes.object,
+  ListEmptyComponent: PropTypes.elementType
 };
