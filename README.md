@@ -22,7 +22,7 @@ import GeoDBCitiesSearch from 'react-native-geodb';
   debounce={200}
   placeholder="Search cities"
   placeholderTextColor="#f5f5f5"
-  onSelectItem={(data) => console.log(data.city)}
+  onSelectItem={(data, metadata) => console.log(data.city)}
   emptyListImagePlaceholder={require('../../../assets/emptyList.png')}
   query={{
     key: GEODB_API_KEY,
@@ -30,7 +30,8 @@ import GeoDBCitiesSearch from 'react-native-geodb';
   }}
   params={{
     language: 'en',
-    limit: 10
+    limit: 10,
+    offset: 0
   }}
   renderLeftButton={() => <CustomIconButton onPress={...}>}
   renderItem={({ item }) => <CustomSearchItem />}
@@ -46,7 +47,7 @@ import GeoDBCitiesSearch from 'react-native-geodb';
 | minLength | number | 2 |
 | query | object (Query) | {...} |
 | params | object (Params) | key/value of GeoDB search url params |
-| onSelectItem | function | called on select search item |
+| onSelectItem | function | not used if renderItem is defined |
 
 ## Query
 | Key | Type | default |

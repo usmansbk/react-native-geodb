@@ -25,6 +25,7 @@ export default class List extends React.Component {
     currentOffSet: null,
     loading: false,
     data: [],
+    metadata: null,
   };
 
   _fetch = debounce((namePrefix) => {
@@ -43,7 +44,10 @@ export default class List extends React.Component {
       method: 'GET',
       headers
     }).then(resonse => resonse.json())
-    .then(({ data }) => this.setState({ data }))
+    .then(({ data, errors, metadata }) => {
+      this.setState({ data, metadata });
+      if (errors) console.log(errors)
+    })
     .catch(console.log);
   }, this.props.debounce);
 
@@ -59,7 +63,7 @@ export default class List extends React.Component {
     if (value.length >= this.props.minLength) this._fetch(value)
   });
 
-  _onPressItem = (data) => this.props.onSelectItem(data);
+  _onPressItem = (data) => this.props.onSelectItem(data, this.state.metadata);
 
   _keyExtractor = (item) => String(item.id);
 
