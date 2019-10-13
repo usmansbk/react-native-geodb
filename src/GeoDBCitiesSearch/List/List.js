@@ -70,7 +70,7 @@ export default class List extends React.Component {
   _renderItem = ({ item }) => (
     <Item
       styles={this.props.styles}
-      text={item.name}
+      text={`${item.name}, ${item.countryCode}`}
       onPress={this._onPressItem}
       data={item}
     />
