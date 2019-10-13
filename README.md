@@ -2,8 +2,9 @@
 A simple and fully customizable GeoDB cities api component for iOS and Android React-Native apps
 
 ### Preview
+<img width="200" alt="Screenshot_2019-10-13-02-46-32-488_com examples" src="https://user-images.githubusercontent.com/10219539/66710663-0a396180-ed75-11e9-94c1-d95ebb0e32eb.png"> <img width="200" alt="Screenshot_2019-10-13-02-46-43-816_com examples" src="https://user-images.githubusercontent.com/10219539/66710675-36ed7900-ed75-11e9-975f-7b4a57567e00.png"> <img width="200" alt="Screenshot_2019-10-13-00-43-13-468_com schdlr" src="https://user-images.githubusercontent.com/10219539/66710692-80d65f00-ed75-11e9-8151-822e9261a48d.png">
 
-![](https://raw.githubusercontent.com/usmansbk/react-native-geodb/master/Assets/screenshot.png
+
 
 ### Installation
 
