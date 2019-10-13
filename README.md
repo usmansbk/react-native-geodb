@@ -11,14 +11,18 @@ A simple and fully customizable GeoDB cities api component for iOS and Android R
 1. ```npm install react-native-geodb --save``` or ```yarn add react-native-geodb```
 2. Get your [GeoDB Cities API key](http://geodb-cities-api.wirefreethought.com/) and [subscribe](https://rapidapi.com/wirefreethought/api/GeoDB%20Cities/pricing) to the free basic plan.
 
+> ...Or Use the Free Instance (without passing any API KEY)
+> The free instance allows up to 432,000 requests/day. However, it has significantly less cities (only cities with populations of greater than 20,0000).
+
 ### Example
 ```jsx
 import GeoDBCitiesSearch from 'react-native-geodb';
 
 <GeoDBCitiesSearch
+  debounce={200}
   placeholder="Search cities"
   placeholderTextColor="#f5f5f5"
-  onPress={(data) => console.log(data.city)}
+  onSelectItem={(data) => console.log(data.city)}
   emptyListImagePlaceholder={require('../../../assets/emptyList.png')}
   query={{
     key: GEODB_API_KEY,
@@ -29,6 +33,7 @@ import GeoDBCitiesSearch from 'react-native-geodb';
     limit: 10
   }}
   renderLeftButton={() => <CustomIconButton onPress={...}>}
+  renderItem={({ item }) => <CustomSearchItem />}
   styles={{...}}
 />
 ```
@@ -41,7 +46,7 @@ import GeoDBCitiesSearch from 'react-native-geodb';
 | minLength | number | 2 |
 | query | object (Query) | {...} |
 | params | object (Params) | key/value of GeoDB search url params |
-| onPress | function | called on select search item |
+| onSelectItem | function | called on select search item |
 
 ## Query
 | Key | Type | default |
@@ -74,7 +79,6 @@ Checkout GeoDB guides for a complete list
 | itemContent | object (View style) |
 | itemText | object (Text style) |
 | emptyList | object (View style) |
-| loader | object (View style) |
 | poweredContainer | object (View style) |
 | powered | object (Image style) |
 | poweredText | object (Text style) |

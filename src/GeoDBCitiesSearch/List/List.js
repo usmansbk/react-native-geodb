@@ -59,7 +59,7 @@ export default class List extends React.Component {
     if (value.length >= this.props.minLength) this._fetch(value)
   });
 
-  _onPressItem = (data) => this.props.onPress(data);
+  _onPressItem = (data) => this.props.onSelectItem(data);
 
   _keyExtractor = (item) => String(item.id);
 
@@ -128,7 +128,7 @@ List.defaultProps = {
     languageCode: "en"
   },
   query: {},
-  onPress: () => null,
+  onSelectItem: () => null,
 };
 
 List.propTypes = {
@@ -144,7 +144,7 @@ List.propTypes = {
   renderItem: PropTypes.elementType,
   query: PropTypes.object,
   params: PropTypes.object,
-  onPress: PropTypes.func,
+  onSelectItem: PropTypes.func,
   placeholderTextColor: PropTypes.string,
   emptyListPlaceholder: PropTypes.object
 };
