@@ -1,0 +1,35 @@
+{
+  "name": "react-native-geodb",
+  "version": "1.0.0",
+  "description": "A simple and fully customizable GeoDB cities api component for iOS and Android React-Native apps",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/usmansbk/react-native-geodb.git"
+  },
+  "keywords": [
+    "react-native",
+    "react",
+    "geodb",
+    "cities",
+    "search",
+    "location",
+    "search"
+  ],
+  "author": "Babakolo Usman Suleiman",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/usmansbk/react-native-geodb/issues"
+  },
+  "homepage": "https://github.com/usmansbk/react-native-geodb#readme",
+  "devDependencies": {
+    "metro-react-native-babel-preset": "^0.56.0"
+  },
+  "dependencies": {
+    "lodash.debounce": "^4.0.8",
+    "prop-types": "^15.7.2"
+  }
+}
