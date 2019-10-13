@@ -139,10 +139,12 @@ List.propTypes = {
   returnKeyType: PropTypes.string,
   placeholder: PropTypes.string,
   autoFocus: PropTypes.bool,
+  clearButtonMode: PropTypes.string,
   renderLeftButton: PropTypes.elementType,
   renderItem: PropTypes.elementType,
   query: PropTypes.object,
   params: PropTypes.object,
   onPress: PropTypes.func,
-  placeholderTextColor: PropTypes.string
+  placeholderTextColor: PropTypes.string,
+  emptyListPlaceholder: PropTypes.object
 };
