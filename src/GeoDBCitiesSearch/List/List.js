@@ -112,23 +112,42 @@ export default class List extends React.Component {
   };
 
   render() {
+    let _getItemLayout = this._getItemLayout;
+
+    const {
+      renderItem,
+      getItemLayout,
+      hidePoweredBy,
+      hideTextInput,
+      keyboardShouldPersistTaps,
+      styles
+    } = this.props;
+
+    if (renderItem) {
+      if (getItemLayout) {
+        _getItemLayout = getItemLayout;
+      } else {
+        _getItemLayout = undefined;
+      }
+    }
+
     return (
       <SafeAreaView style={defaultStyles.contentContainer}>
         <FlatList
           contentContainerStyle={[
             defaultStyles.contentContainer,
-            this.props.styles.contentContainer
+            styles.contentContainer
           ]}
           data={this.state.data}
           ListEmptyComponent={this._renderEmpty}
           ItemSeparatorComponent={this._renderSeparator}
-          ListFooterComponent={this.props.hidePoweredBy ? undefined : this._renderFooter}
-          ListHeaderComponent={this.props.hideTextInput ? undefined : this._renderHeader}
-          renderItem={this.props.renderItem || this._renderItem}
+          ListFooterComponent={hidePoweredBy ? undefined : this._renderFooter}
+          ListHeaderComponent={hideTextInput ? undefined : this._renderHeader}
+          renderItem={renderItem || this._renderItem}
           keyExtractor={this._keyExtractor}
-          stickyHeaderIndices={this.props.hideTextInput ? undefined : [0]}
-          getItemLayout={this._getItemLayout}
-          keyboardShouldPersistTaps={this.props.keyboardShouldPersistTaps}
+          stickyHeaderIndices={hideTextInput ? undefined : [0]}
+          getItemLayout={_getItemLayout}
+          keyboardShouldPersistTaps={keyboardShouldPersistTaps}
         />
       </SafeAreaView>
     );
@@ -188,5 +207,6 @@ List.propTypes = {
   onResponse: PropTypes.func,
   underlineColorAndroid: PropTypes.string,
   hidePoweredBy: PropTypes.bool,
-  multiline: PropTypes.bool
+  multiline: PropTypes.bool,
+  getItemLayout: PropTypes.func
 };
