@@ -14,7 +14,12 @@ export default ({
   clearButtonMode="while-editing",
   renderLeftButton: LeftButton = () => null,
   returnKeyType="search",
-  placeholderTextColor
+  placeholderTextColor,
+  keyboardAppearance,
+  numberOfLines,
+  editable,
+  onSubmitEditing,
+  multiline
 }) => (
   <View style={[
     defaultStyles.textInputContainer,
@@ -22,6 +27,9 @@ export default ({
   ]}>
     <LeftButton />
     <TextInput
+      multiline={multiline}
+      numberOfLines={numberOfLines}
+      editable={editable}
       placeholderTextColor={placeholderTextColor}
       placeholder={placeholder}
       autoFocus={autoFocus}
@@ -30,6 +38,8 @@ export default ({
       clearButtonMode={clearButtonMode}
       returnKeyLabel={returnKeyType}
       returnKeyType={returnKeyType}
+      keyboardAppearance={keyboardAppearance}
+      onSubmitEditing={onSubmitEditing}
       value={value}
       style={[
         defaultStyles.textInput,

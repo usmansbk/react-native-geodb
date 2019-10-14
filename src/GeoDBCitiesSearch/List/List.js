@@ -44,11 +44,13 @@ export default class List extends React.Component {
       method: 'GET',
       headers
     }).then(resonse => resonse.json())
-    .then(({ data, errors, metadata }) => {
-      this.setState({ data, metadata });
-      if (errors) console.log(errors)
+    .then((json) => {
+      const { data, errors, error, metadata } = json;
+      this.setState({ data, metadata }, () => this.props.onResponse(json));
+      const e = errors || error;
+      if (e) this.props.onError(e);
     })
-    .catch(console.log);
+    .catch(this.props.onError);
   }, this.props.debounce);
 
   _getItemLayout = (_, index) => (
@@ -83,9 +85,15 @@ export default class List extends React.Component {
     autoFocus={this.props.autoFocus}
     clearButtonMode={this.props.clearButtonMode}
     returnKeyType={this.props.returnKeyType}
+    keyboardAppearance={this.props.keyboardAppearance}
+    underlineColorAndroid={this.props.underlineColorAndroid}
+    editable={this.props.editable}
+    multiline={this.props.multiline}
+    numberOfLines={this.props.numberOfLines}
     styles={this.props.styles}
     onChangeText={this._onChangeText}
     value={this.state.value}
+    onSubmitEditing={this.props.onSubmitEditing}
   />;
 
   _renderFooter = () => <Footer styles={this.props.styles} />;
@@ -114,11 +122,11 @@ export default class List extends React.Component {
           data={this.state.data}
           ListEmptyComponent={this._renderEmpty}
           ItemSeparatorComponent={this._renderSeparator}
-          ListFooterComponent={this._renderFooter}
-          ListHeaderComponent={this._renderHeader}
+          ListFooterComponent={this.props.hidePoweredBy ? undefined : this._renderFooter}
+          ListHeaderComponent={this.props.hideTextInput ? undefined : this._renderHeader}
           renderItem={this.props.renderItem || this._renderItem}
           keyExtractor={this._keyExtractor}
-          stickyHeaderIndices={[0]}
+          stickyHeaderIndices={this.props.hideTextInput ? undefined : [0]}
           getItemLayout={this._getItemLayout}
           keyboardShouldPersistTaps={this.props.keyboardShouldPersistTaps}
         />
@@ -131,6 +139,7 @@ List.defaultProps = {
   styles: {},
   debounce: 200,
   keyboardShouldPersistTaps: "always",
+  keyboardAppearance: "default",
   minLength: 2,
   returnKeyType: "search",
   placeholder: "Search cities",
@@ -141,13 +150,23 @@ List.defaultProps = {
     languageCode: "en"
   },
   query: {},
-  onSelectItem: () => null
+  onSelectItem: () => null,
+  onError: console.log,
+  multiline: false,
+  numberOfLines: 1,
+  hideTextInput: false,
+  hidePoweredBy: false,
+  editable: true,
+  onSubmitEditing: () => null,
+  onResponse: () => null,
+  underlineColorAndroid: 'transparent'
 };
 
 List.propTypes = {
   styles: PropTypes.object,
   debounce: PropTypes.number,
   keyboardShouldPersistTaps: PropTypes.string,
+  keyboardAppearance: PropTypes.string,
   minLength: PropTypes.number,
   returnKeyType: PropTypes.string,
   placeholder: PropTypes.string,
@@ -160,5 +179,14 @@ List.propTypes = {
   onSelectItem: PropTypes.func,
   placeholderTextColor: PropTypes.string,
   emptyListPlaceholder: PropTypes.object,
-  ListEmptyComponent: PropTypes.elementType
+  ListEmptyComponent: PropTypes.elementType,
+  onError: PropTypes.func,
+  numberOfLines: PropTypes.number,
+  hideTextInput: PropTypes.bool,
+  editable: PropTypes.bool,
+  onSubmitEditing: PropTypes.func,
+  onResponse: PropTypes.func,
+  underlineColorAndroid: PropTypes.string,
+  hidePoweredBy: PropTypes.bool,
+  multiline: PropTypes.bool
 };

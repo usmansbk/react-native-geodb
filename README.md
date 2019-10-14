@@ -49,6 +49,10 @@ import GeoDBCitiesSearch from 'react-native-geodb';
 | query | object (Query) | {...} |
 | params | object (Params) | key/value of GeoDB search url params |
 | onSelectItem | function | not used if renderItem is defined |
+| onError | function | console.log |
+| onResponse | function | console.log |
+| hideTextInput | boolean | false |
+| hidePoweredBy | boolean | false |
 
 ## Query
 | Key | Type | default |
