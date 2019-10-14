@@ -26,7 +26,8 @@ import GeoDBCitiesSearch from 'react-native-geodb';
   emptyListImagePlaceholder={require('../../../assets/emptyList.png')}
   query={{
     key: GEODB_API_KEY,
-    api: 'cities'
+    api: 'geo',
+    types: 'cities'
   }}
   params={{
     language: 'en',
