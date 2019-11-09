@@ -5089,9 +5089,9 @@ react-is@^16.8.1, react-is@^16.8.4, react-is@^16.9.0:
   resolved "https://registry.yarnpkg.com/react-is/-/react-is-16.10.2.tgz#984120fd4d16800e9a738208ab1fba422d23b5ab"
   integrity sha512-INBT1QEgtcCCgvccr5/86CfD71fw9EPmDxgiJX4I2Ddr6ZsV6iFXsuby+qWJPtmNuMY0zByTsG4468P7nHuNWA==
 
-"react-native-geodb@..\\react-native-geodb-1.1.9.tgz":
-  version "1.1.9"
-  resolved "..\\react-native-geodb-1.1.9.tgz#fb7ef924fd5a90a43e8b06379f4e116b5302a7aa"
+react-native-geodb@../react-native-geodb-1.2.5.tgz:
+  version "1.2.5"
+  resolved "../react-native-geodb-1.2.5.tgz#8b8d9571a9dfb05927a5ae9f1c6dfbc13332be95"
   dependencies:
     lodash.debounce "^4.0.8"
     prop-types "^15.7.2"

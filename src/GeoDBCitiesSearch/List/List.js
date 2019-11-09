@@ -26,9 +26,11 @@ export default class List extends React.Component {
     loading: false,
     data: [],
     metadata: {},
+    loading: false
   };
 
   _fetch = debounce((namePrefix) => {
+    if (namePrefix.length < this.props.minLength) return;
     const {
       query,
       params
@@ -39,18 +41,23 @@ export default class List extends React.Component {
       "x-rapidapi-host": HOST,
       "x-rapidapi-key": query.key 
     };
-
+    if (this.props.showActivityIndicator) this.setState({ loading: true });
     fetch(url, {
       method: 'GET',
       headers
     }).then(resonse => resonse.json())
     .then((json) => {
+      if (window.LOG_LEVEL === 'DEBUG') console.log(json);
       const { data, errors, error, metadata } = json;
       this.setState({ data, metadata }, () => this.props.onResponse(json));
       const e = errors || error;
       if (e) this.props.onError(e);
+      this.setState({ loading: false });
     })
-    .catch(this.props.onError);
+    .catch(error => {
+      this.setState({ loading: false });
+      this.props.onError(error);
+    });
   }, this.props.debounce);
 
   _getItemLayout = (_, index) => (
@@ -61,9 +68,9 @@ export default class List extends React.Component {
     }
   ); 
   
-  _onChangeText = (value) => this.setState({ value }, () => {
-    if (value.length >= this.props.minLength) this._fetch(value)
-  });
+  _onChangeText = (value) => this.setState({ value }, () => this._fetch(value));
+
+  _onRefresh = () => this.props.showActivityIndicator ? this._fetch(this.state.value) : null;
 
   _onPressItem = (data) => this.props.onSelectItem(data);
 
@@ -138,6 +145,8 @@ export default class List extends React.Component {
             defaultStyles.contentContainer,
             styles.contentContainer
           ]}
+          refreshing={this.state.loading}
+          onRefresh={this._onRefresh}
           data={this.state.data}
           ListEmptyComponent={this._renderEmpty}
           ItemSeparatorComponent={this._renderSeparator}
@@ -178,7 +187,8 @@ List.defaultProps = {
   editable: true,
   onSubmitEditing: () => null,
   onResponse: () => null,
-  underlineColorAndroid: 'transparent'
+  underlineColorAndroid: 'transparent',
+  showActivityIndicator: false
 };
 
 List.propTypes = {
@@ -208,5 +218,6 @@ List.propTypes = {
   underlineColorAndroid: PropTypes.string,
   hidePoweredBy: PropTypes.bool,
   multiline: PropTypes.bool,
-  getItemLayout: PropTypes.func
+  getItemLayout: PropTypes.func,
+  showActivityIndicator: PropTypes.bool
 };

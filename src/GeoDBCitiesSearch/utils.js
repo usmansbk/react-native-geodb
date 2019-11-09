@@ -16,7 +16,8 @@ export function buildURL(query, params, namePrefix) {
   const queryParams = buildParams(params, namePrefix);
 
   const HOST = key ? DEFAULT_HOST : FREE_END_POINT;
-  const url = `http://${HOST}/${version}/${api}/${types}?${queryParams}`;
+  const PROTOCOL = key ? 'https' : 'http';
+  const url = `${PROTOCOL}://${HOST}/${version}/${api}/${types}?${queryParams}`;
   return url;
 }
 
