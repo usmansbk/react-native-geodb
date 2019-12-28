@@ -128,7 +128,8 @@ export default class List extends React.Component {
       hidePoweredBy,
       hideTextInput,
       keyboardShouldPersistTaps,
-      styles
+      styles,
+      progressViewOffset
     } = this.props;
 
     if (renderItem) {
@@ -138,6 +139,7 @@ export default class List extends React.Component {
         _getItemLayout = undefined;
       }
     }
+    const colors = this.props.colors ? this.props.colors : undefined;
 
     return (
       <SafeAreaView style={defaultStyles.contentContainer}>
@@ -149,9 +151,9 @@ export default class List extends React.Component {
           refreshControl={<RefreshControl
             refreshing={this.state.loading}
             onRefresh={this._onRefresh}
-            colors={this.props.colors || []}
+            colors={colors}
+            progressViewOffset={this.props.progressViewOffset}
           />}
-          progressViewOffset={20}
           data={this.state.data}
           ListEmptyComponent={this._renderEmpty}
           ItemSeparatorComponent={this._renderSeparator}
@@ -193,7 +195,8 @@ List.defaultProps = {
   onSubmitEditing: () => null,
   onResponse: () => null,
   underlineColorAndroid: 'transparent',
-  showActivityIndicator: false
+  showActivityIndicator: false,
+  progressViewOffset: 60
 };
 
 List.propTypes = {
@@ -224,5 +227,6 @@ List.propTypes = {
   hidePoweredBy: PropTypes.bool,
   multiline: PropTypes.bool,
   getItemLayout: PropTypes.func,
-  showActivityIndicator: PropTypes.bool
+  showActivityIndicator: PropTypes.bool,
+  progressViewOffset: PropTypes.number
 };
