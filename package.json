@@ -1,6 +1,6 @@
 {
   "name": "react-native-geodb",
-  "version": "1.2.5",
+  "version": "1.2.6",
   "description": "A simple and fully customizable GeoDB cities api component for iOS and Android React-Native apps",
   "main": "index.js",
   "scripts": {
