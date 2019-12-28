@@ -54,6 +54,8 @@ import GeoDBCitiesSearch from 'react-native-geodb';
 | onResponse | function | console.log |
 | hideTextInput | boolean | false |
 | hidePoweredBy | boolean | false |
+| showActivityIndicator | boolean | false |
+| colors | array | []
 
 ## Query
 | Key | Type | default |

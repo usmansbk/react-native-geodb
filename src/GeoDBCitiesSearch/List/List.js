@@ -2,7 +2,8 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import {
   FlatList,
-  SafeAreaView
+  SafeAreaView,
+  RefreshControl
 } from 'react-native';
 import debounce from 'lodash.debounce';
 import Item from './Item';
@@ -145,8 +146,12 @@ export default class List extends React.Component {
             defaultStyles.contentContainer,
             styles.contentContainer
           ]}
-          refreshing={this.state.loading}
-          onRefresh={this._onRefresh}
+          refreshControl={<RefreshControl
+            refreshing={this.state.loading}
+            onRefresh={this._onRefresh}
+            colors={this.props.colors || []}
+          />}
+          progressViewOffset={20}
           data={this.state.data}
           ListEmptyComponent={this._renderEmpty}
           ItemSeparatorComponent={this._renderSeparator}
