@@ -6,7 +6,9 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "clean": "rm *.tgz",
-    "pack": "npm pack"
+    "pack": "npm pack",
+    "bump": "npm version patch",
+    "prepack": "yarn clean && yarn bump"
   },
   "repository": {
     "type": "git",
