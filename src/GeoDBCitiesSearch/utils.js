@@ -5,9 +5,6 @@ import {
   FREE_END_POINT
 } from './env';
 
-let KEY;
-let HOST = FREE_END_POINT;
-
 export function buildURL(query, params, namePrefix) {
   const {
     key,
@@ -16,11 +13,10 @@ export function buildURL(query, params, namePrefix) {
     types='cities',
   } = query;
 
-  if (key && !KEY) init({key});
-
+  const HOST = key ? DEFAULT_HOST : FREE_END_POINT;
   const queryParams = buildParams(params, namePrefix);
 
-  const PROTOCOL = KEY ? 'https' : 'http';
+  const PROTOCOL = key ? 'https' : 'http';
   const url = `${PROTOCOL}://${HOST}/${version}/${api}/${types}?${queryParams}`;
   return url;
 }
@@ -58,12 +54,13 @@ const parseLocation = location => {
     return `${printableNumber(lat)}${printableNumber(lng)}`
 };
 
-export async function geocoder(location) {
+export async function geocoder(location, key) {
   const locationId = parseLocation(location);
+  const HOST = key ? DEFAULT_HOST : FREE_END_POINT;
   const url = `https://${HOST}/v1/geo/locations/${locationId}/nearbyCities?limit=1&radius=100`;
   const headers = {
       "x-rapidapi-host": HOST,
-      "x-rapidapi-key": KEY 
+      "x-rapidapi-key": key
   };
   const response = await fetch(url, {
     method: 'GET',
@@ -75,9 +72,4 @@ export async function geocoder(location) {
     throw new Error(JSON.stringify(errors));
   }
   return data;
-}
-
-export function init({ key }) {
-  KEY = key;
-  HOST = KEY ? DEFAULT_HOST : FREE_END_POINT;
 }
