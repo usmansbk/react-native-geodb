@@ -25,7 +25,7 @@ import GeoDBCitiesSearch from 'react-native-geodb';
   onSelectItem={(data) => console.log(data.city)}
   emptyListImagePlaceholder={require('../../../assets/emptyList.png')}
   query={{
-    key: GEODB_API_KEY, // skip if you've set key already
+    key: GEODB_API_KEY,
     api: 'geo',
     types: 'cities'
   }}
