@@ -8,7 +8,7 @@
     "clean": "rm *.tgz",
     "pack": "npm pack",
     "bump": "npm version patch",
-    "prepack": "yarn clean && yarn bump"
+    "prepack": "yarn clean"
   },
   "repository": {
     "type": "git",
