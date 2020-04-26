@@ -1,7 +1,8 @@
-import GeoDBCitiesSearch, { Geocoder } from './src/GeoDBCitiesSearch';
+import GeoDBCitiesSearch, { Geocoder, init } from './src/GeoDBCitiesSearch';
 
 export {
-  Geocoder
+  Geocoder,
+  init
 };
 
 export default GeoDBCitiesSearch;

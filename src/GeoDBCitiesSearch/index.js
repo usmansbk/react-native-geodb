@@ -1,8 +1,9 @@
 import List from './List';
-import { geocoder } from './utils';
+import { geocoder, init } from './utils';
 
 export {
-  geocoder as Geocoder
+  geocoder as Geocoder,
+  init
 };
 
 export default List;
