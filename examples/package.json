@@ -11,7 +11,8 @@
   },
   "dependencies": {
     "react": "16.9.0",
-    "react-native": "0.61.2"
+    "react-native": "0.61.2",
+    "react-native-geodb": "../react-native-geodb-v1.5.3.tgz"
   },
   "devDependencies": {
     "@babel/core": "^7.6.4",
