@@ -2,7 +2,7 @@ import React from 'react';
 import GeoDBCitiesSearch, { Geocoder } from 'react-native-geodb';
 
 export default () => {
-	Geocoder({}).then(response => console.log(response)).catch(error => console.log(error));
+	Geocoder({lat: 10.52641, lng: 7.43879}).then(response => console.log(response)).catch(error => console.log(error));
 	return (
 		<GeoDBCitiesSearch
 			query={{
