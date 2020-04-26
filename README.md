@@ -18,8 +18,6 @@ A simple and fully customizable GeoDB cities api component for iOS and Android R
 ```jsx
 import GeoDBCitiesSearch from 'react-native-geodb';
 
-GeoDBCitiesSearch.init({key: GEODB_API_KEY}); // Set your rapidapi key
-
 <GeoDBCitiesSearch
   debounce={200}
   placeholder="Search cities"
@@ -101,7 +99,7 @@ Checkout GeoDB guides for a complete list
 import { Geocoder } from 'react-native-geodb';
 
 // Returns a promise of nearby cities of the given location object
-Geocoder({ lat: xxxx, lng: xxxx }).then(response => {
+Geocoder({ lat: xxxx, lng: xxxx }, key).then(response => {
   console.log(response);
 });
 ```
